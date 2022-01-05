@@ -8,7 +8,6 @@ jobs:
   package:
     runs-on: ubuntu-latest
     environment: yandexCloud
-    needs: build
     steps:
       - uses: actions/checkout@v2
       - run: docker build -t cr.yandex/crpg1rhtqejenaohq3ja/free-speak-nginx:master -f Dockerfile .
