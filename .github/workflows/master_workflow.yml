@@ -1,0 +1,16 @@
+name: master_nginx
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    environment: yandexCloud
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker build -t cr.yandex/crpg1rhtqejenaohq3ja/free-speak-nginx:master -f Dockerfile .
+      - run: docker login --username oauth --password ${{ secrets.YC_TOKEN }} cr.yandex
+      - run: docker push cr.yandex/crpg1rhtqejenaohq3ja/free-speak-nginx:master
